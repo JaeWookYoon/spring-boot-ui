@@ -1,14 +1,13 @@
-package com.boot.auth.controller;
+package com.boot.ui.auth.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value="/api")
 public class AuthController {
-
-	@PostMapping("/token")	
+	@PostMapping(value = "/token")	
 	public String token() {
 		return "token";
 	}

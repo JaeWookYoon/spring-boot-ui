@@ -1,4 +1,4 @@
-package com.boot.config.security;
+package com.boot.ui.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;
@@ -14,9 +14,7 @@ public class WebConfigureImpl implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT", "PATCH", "OPTIONS")
-                .allowedHeaders("headers")
-                .maxAge(3000);
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "OPTIONS");
     }
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {

@@ -1,16 +1,13 @@
-package com.boot.config.security;
+package com.boot.ui.config.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,8 +18,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class WebSecurityConfigureImpl  {
-	@Autowired
-	private BCryptPasswordEncoder bcryptEncoder;
+		
+	@Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+	
 	@Bean
 	public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
 	    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
@@ -41,7 +42,7 @@ public class WebSecurityConfigureImpl  {
 	public AuthenticationManager authManager(HttpSecurity http, BCryptPasswordEncoder bCryptPasswordEncoder, UserDetailsService userDetailService) 
 	  throws Exception {
 	    return http.getSharedObject(AuthenticationManagerBuilder.class)
-	      .userDetailsService(userDetailsService(bcryptEncoder))
+	      .userDetailsService(userDetailsService(bCryptPasswordEncoder))
 	      .passwordEncoder(bCryptPasswordEncoder)
 	      .and()
 	      .build();
@@ -49,19 +50,7 @@ public class WebSecurityConfigureImpl  {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	    http.csrf()
-	      .disable()
-	      .authorizeRequests()
-	      .antMatchers(HttpMethod.DELETE)
-	      .hasRole("ADMIN")
-	      .antMatchers("/admin/**")
-	      .hasAnyRole("ADMIN")
-	      .antMatchers("/user/**")
-	      .hasAnyRole("USER", "ADMIN")
-	      .antMatchers("/login/**")
-	      .anonymous()
-	      .anyRequest()
-	      .authenticated()
-	      .and()
+	      .disable()	      	      	     	      	      
 	      .httpBasic()
 	      .disable()
 	      .formLogin()

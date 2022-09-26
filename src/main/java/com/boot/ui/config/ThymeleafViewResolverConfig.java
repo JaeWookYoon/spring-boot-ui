@@ -1,4 +1,4 @@
-package com.boot.config.ui;
+package com.boot.ui.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +22,13 @@ public class ThymeleafViewResolverConfig {
 		return viewResolver;  
 	}  
 	// Thymeleaf template engine with Spring integration  
-	@Bean  public SpringTemplateEngine thymeleafTemplateEngine() {    
+	@Bean  
+	public SpringTemplateEngine thymeleafTemplateEngine() {    
 		SpringTemplateEngine templateEngine = new SpringTemplateEngine();    
 		templateEngine.setTemplateResolver(thymeleafTemplateResolver());    
 		templateEngine.setEnableSpringELCompiler(true);    
 		return templateEngine;  
-		}  
+	}  
 	@Bean  
 	public SpringResourceTemplateResolver springResourceTemplateResolver() {    
 		return new SpringResourceTemplateResolver();  
