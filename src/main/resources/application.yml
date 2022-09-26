@@ -1,0 +1,58 @@
+server:
+  port: 8080
+
+tomcat:
+  ajp:
+   protocol: AJP/1.3
+   port: 8002
+
+spring:
+  profiles:
+    active: debug
+  web:
+    resources:
+      static-locations: classpath:classpath:/resources/, classpath:/templates/
+---
+spring:
+  profiles: debug
+  datasource:
+    username: admin
+    password: Rorlwlakfk18@
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@jakedbdb_high?TNS_ADMIN=C:/Users/iuh12/Downloads/wallet
+    
+  jpa: 
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties: 
+      hibernate: 
+        dialect: org.hibernate.dialect.OracleDialect
+        temp.use_jdbc_metadata_defaults: false
+
+---
+spring: 
+  profiles: release
+  datasource:
+    username: admin
+    password: Rorlwlakfk18@
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@jakedbdb_high?TNS_ADMIN=./wallet
+
+  jpa: 
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties: 
+      hibernate: 
+        dialect: org.hibernate.dialect.OracleDialect
+        temp.use_jdbc_metadata_defaults: false
+      main:
+        allow-bean-definition-overriding: true
+    database: default
+---
+kafka:
+   bootstrapAddress: localhost:9092
+message:
+   topic: mytopic
+
