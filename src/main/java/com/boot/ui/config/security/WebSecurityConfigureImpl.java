@@ -56,13 +56,14 @@ public class WebSecurityConfigureImpl  {
 	      .formLogin()
 	      .disable()
 	      ;
+	    http.authorizeHttpRequests()
+	    .antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico").permitAll();
 
 	    return http.build();
 	}
-	@Bean
-	public WebSecurityCustomizer webSecurityCustomizer() {
-	    return (web) -> web
-	      .ignoring()
-	      .antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico");
-	}
+	/*
+	 * @Bean public WebSecurityCustomizer webSecurityCustomizer() { return (web) ->
+	 * web .ignoring() .antMatchers("/css/**", "/js/**", "/img/**", "/lib/**",
+	 * "/favicon.ico"); }
+	 */
 }

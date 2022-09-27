@@ -30,10 +30,13 @@ export default {
         
         getToken:function(){
             var param = {
-                "id":this.id,
-                "pw":this.pw
+                id:this.id,
+                pw:this.pw
             };
-            axios.post('/api/token',param)
+            console.log(this.id + " , " + this.pw);
+            axios.post('/api/token',JSON.stringify(param),{
+	            headers: { "Content-Type": `application/json`}
+            })
             .then(res => {
                 console.log(res);
             });
