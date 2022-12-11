@@ -2,8 +2,8 @@ const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
-  outputDir: "../src/main/resources/templates",  // 빌드 타겟 디렉토리
-  indexPath: "../templates/index.html",
+  outputDir: "../src/main/resources/templates/",  // 빌드 타겟 디렉토리
+  indexPath: "../templates/view/index.html",
   devServer: {
     port:4545,
     proxy: {

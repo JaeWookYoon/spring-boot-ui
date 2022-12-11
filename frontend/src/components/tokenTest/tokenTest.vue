@@ -1,6 +1,6 @@
 <template>
-    <div class="coinView">        
-        읍다 그런거
+    <div class="tokenTest">
+        와 업데이트가 안되노!!!~!~!~!
     </div>
 </template>
 

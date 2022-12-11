@@ -36,7 +36,7 @@ public class ThymeleafViewResolverConfig {
 	@Bean  
 	public ITemplateResolver thymeleafTemplateResolver() {    
 		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();    
-		templateResolver.setPrefix("templates/");    
+		templateResolver.setPrefix("templates/view/");
 		templateResolver.setCacheable(false);    
 		templateResolver.setSuffix(".html");    
 		templateResolver.setTemplateMode(TemplateMode.HTML);
