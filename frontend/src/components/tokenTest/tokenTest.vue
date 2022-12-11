@@ -1,9 +1,6 @@
 <template>
-    <div class="coinView">
-        <input type="text" id="id" v-model="id"/>
-        <input type="password" id="pw" v-model="pw"/>
-        <button v-on:click="getToken()">테스트!</button>
-        <input type="text" id="token" v-model="token"/>
+    <div class="coinView">        
+        읍다 그런거
     </div>
 </template>
 

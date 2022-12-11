@@ -15,30 +15,60 @@ export default {
             tokenInfo:null,
             id:null,
             pw:null,
-            token:null
+            token:"TOKEN",
+            user:{
+                id:null,
+                pw:null
+            }
         }
     },
 
     computed: {},
 
-    watch: {},
+    watch: {
+        id:function(){
+            this.user.id = this.id;
+        },
+        pw:function(){
+            this.user.pw = this.pw;
+        }
+    },
 
     created () {
     },
 
     methods: {
         
-        getToken:function(){
-            var param = {
-                id:this.id,
-                pw:this.pw
-            };
-            console.log(this.id + " , " + this.pw);
-            axios.post('/api/token',JSON.stringify(param),{
-	            headers: { "Content-Type": `application/json`}
+        getToken:function() {
+            axios.post('/call/token',{
+                    data:{
+                        id:this.user.id,
+                        pw: this.user.pw
+                    },
+                    headers: { "content-Type": `application/json`}
+                })
+            .then(res => {
+                //console.log(res);
+                this.token = JSON.stringify(res.data);                
+            });
+        },
+        publicTest:function() {
+            axios.post('/call/token')
+            .then(res => {
+                console.log(res);
+                                
+            });
+        },
+        privateTest:function() {
+            axios.post('/call/token',{
+                headers: { 
+                    "content-Type": `application/json`,
+                    "bearer": this.token.access_token
+                }
             })
             .then(res => {
                 console.log(res);
+                                
             });
         }
     }

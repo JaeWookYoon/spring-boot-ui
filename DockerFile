@@ -1,4 +1,6 @@
-FROM openjdk:11-jdk-oracle
+FROM openjdk:11-jdk
+ENV	USE_PROFILE release
+ENV CHOKIDAR_USEPOLLING=true
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=${USE_PROFILE}", "-jar","/app.jar"]
